@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements ConsultaGetAsync.
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
         adapter = new RecyclerViewAdapter(this,resultado);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 }

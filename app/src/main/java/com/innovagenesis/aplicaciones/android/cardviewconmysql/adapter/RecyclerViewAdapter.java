@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.innovagenesis.aplicaciones.android.cardviewconmysql.Donantes;
 import com.innovagenesis.aplicaciones.android.cardviewconmysql.R;
@@ -44,12 +45,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
 
         Donantes current = data.get(position);
 
-        holder.idCedula.setText(current.getDonante_ced());
-        holder.apellido.setText(current.getDonante_apellido());
-        holder.edad.setText(current.getDonante_edad());
-        holder.tipoSangre.setText(current.getDonante_factor());
-        holder.peso.setText(current.getDonante_peso());
-        holder.estatura.setText(current.getDonante_estatura());
+        int a = current.donante_ced;
+        String b = current.donante_nombre;
+
+        Toast.makeText(context,b,Toast.LENGTH_SHORT).show();
+
+        holder.idCedula.setText(String.valueOf(current.donante_ced));
+        holder.nombre.setText(current.donante_nombre);
+        holder.apellido.setText(current.donante_apellido);
+        holder.edad.setText(String.valueOf(current.donante_edad));
+        holder.tipoSangre.setText(current.donante_factor);
+        holder.peso.setText(String.valueOf(current.donante_peso));
+        holder.estatura.setText(String.valueOf(current.donante_estatura));
 
     }
 

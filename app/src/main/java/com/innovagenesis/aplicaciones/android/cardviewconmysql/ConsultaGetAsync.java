@@ -80,18 +80,18 @@ public class ConsultaGetAsync extends AsyncTask<URL, Integer, String>{
 
         List<Donantes> data = new ArrayList<>();
 
-        
+
         try {
             JSONArray jsonArray = new JSONArray(s);
             for (int i = 0; i < jsonArray.length(); i++) {
                 Donantes donantes = new Donantes();
-                donantes.donante_ced = jsonArray.getJSONObject(i).getInt("donante_cedula");
+                donantes.donante_ced = jsonArray.getJSONObject(i).getInt("donante_ced");
                 donantes.donante_nombre = jsonArray.getJSONObject(i).getString("donante_nombre");
                 donantes.donante_apellido = jsonArray.getJSONObject(i).getString("donante_apellido");
                 donantes.donante_edad = jsonArray.getJSONObject(i).getInt("donante_edad");
                 donantes.donante_factor = jsonArray.getJSONObject(i).getString("donante_tipo_sangre");
                 donantes.donante_peso = jsonArray.getJSONObject(i).getInt("donante_peso");
-                donantes.donante_estatura = jsonArray.getJSONObject(i).getInt("donantes_estatura");
+                donantes.donante_estatura = jsonArray.getJSONObject(i).getInt("donante_estatura");
                 data.add(donantes);
             }
 
