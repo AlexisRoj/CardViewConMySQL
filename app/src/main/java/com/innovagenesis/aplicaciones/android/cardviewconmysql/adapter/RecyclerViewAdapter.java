@@ -24,15 +24,13 @@ import java.util.List;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
 
     private Context context;
-    private Activity activity;
     LayoutInflater inflater;
     List<Donantes> data = Collections.emptyList();
 
 
 
-    public RecyclerViewAdapter(Context context, Activity activity, List<Donantes> data) {
+    public RecyclerViewAdapter(Context context, List<Donantes> data) {
         this.context = context;
-        this.activity = activity;
         inflater = LayoutInflater.from(context);
         this.data = data;
     }
@@ -72,7 +70,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
                 //Toast.makeText(context,"Edit" + b,Toast.LENGTH_SHORT).show();
                 //MainActivity act = new MainActivity();
 
-                mensaje(activity,ced_borrar);
+                //mensaje(activity,ced_borrar);
             }
         });
 
