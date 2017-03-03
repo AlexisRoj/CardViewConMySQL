@@ -1,12 +1,17 @@
 package com.innovagenesis.aplicaciones.android.cardviewconmysql;
 
+import android.app.Activity;
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.innovagenesis.aplicaciones.android.cardviewconmysql.adapter.RecyclerViewAdapter;
+import com.innovagenesis.aplicaciones.android.cardviewconmysql.async_class.ConsultaGetAsync;
+import com.innovagenesis.aplicaciones.android.cardviewconmysql.async_class.DeleteDonanteAsync;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -39,9 +44,24 @@ public class MainActivity extends AppCompatActivity implements ConsultaGetAsync.
 
 
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
-        adapter = new RecyclerViewAdapter(this,resultado);
+        adapter = new RecyclerViewAdapter(this,MainActivity.this,resultado);
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    public void mensaje (Activity activity, int ced){
+
+
+        try {
+            new DeleteDonanteAsync(activity).execute(new URL("http://192.168.100.3:8080/WebServiceExamenSiete/webapi/Donantes" +
+                    ced));
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+
+        //Toast.makeText(context, mensaje,Toast.LENGTH_SHORT).show();
     }
 }

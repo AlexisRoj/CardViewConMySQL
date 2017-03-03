@@ -1,5 +1,6 @@
 package com.innovagenesis.aplicaciones.android.cardviewconmysql.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.innovagenesis.aplicaciones.android.cardviewconmysql.Donantes;
+import com.innovagenesis.aplicaciones.android.cardviewconmysql.MainActivity;
 import com.innovagenesis.aplicaciones.android.cardviewconmysql.R;
 import com.innovagenesis.aplicaciones.android.cardviewconmysql.RecyclerViewHolder;
 
@@ -22,11 +24,15 @@ import java.util.List;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
 
     private Context context;
+    private Activity activity;
     LayoutInflater inflater;
     List<Donantes> data = Collections.emptyList();
 
-    public RecyclerViewAdapter(Context context, List<Donantes> data) {
+
+
+    public RecyclerViewAdapter(Context context, Activity activity, List<Donantes> data) {
         this.context = context;
+        this.activity = activity;
         inflater = LayoutInflater.from(context);
         this.data = data;
     }
@@ -43,12 +49,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     @Override
     public void onBindViewHolder(RecyclerViewHolder holder, int position) {
 
-        Donantes current = data.get(position);
+        final Donantes current = data.get(position);
 
         int a = current.donante_ced;
-        String b = current.donante_nombre;
+        final String b = current.donante_nombre;
 
-        Toast.makeText(context,b,Toast.LENGTH_SHORT).show();
+        final int ced_borrar = current.donante_ced;
+
+        //Toast.makeText(context,b,Toast.LENGTH_SHORT).show();
 
         holder.idCedula.setText(String.valueOf(current.donante_ced));
         holder.nombre.setText(current.donante_nombre);
@@ -58,10 +66,29 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         holder.peso.setText(String.valueOf(current.donante_peso));
         holder.estatura.setText(String.valueOf(current.donante_estatura));
 
+        holder.edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(context,"Edit" + b,Toast.LENGTH_SHORT).show();
+                //MainActivity act = new MainActivity();
+
+                mensaje(activity,ced_borrar);
+            }
+        });
+
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context,"Delete",Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     @Override
     public int getItemCount() {
         return data.size();
     }
+
+
 }

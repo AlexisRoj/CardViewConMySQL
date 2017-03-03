@@ -2,6 +2,7 @@ package com.innovagenesis.aplicaciones.android.cardviewconmysql;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -13,6 +14,7 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
 
 
     public TextView idCedula,nombre, apellido, edad, tipoSangre, peso, estatura;
+    public ImageView edit,delete;
 
     public RecyclerViewHolder(View itemView) {
         super(itemView);
@@ -24,6 +26,10 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         tipoSangre = (TextView) itemView.findViewById(R.id.cvTipoSangre);
         peso = (TextView) itemView.findViewById(R.id.cvPeso);
         estatura = (TextView) itemView.findViewById(R.id.cvEstatura);
+        edit = (ImageView)itemView.findViewById(R.id.imgEditDonante);
+        delete = (ImageView)itemView.findViewById(R.id.imgDeleteDonante);
 
     }
+
+
 }

@@ -1,4 +1,4 @@
-package com.innovagenesis.aplicaciones.android.cardviewconmysql;
+package com.innovagenesis.aplicaciones.android.cardviewconmysql.async_class;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
+import com.innovagenesis.aplicaciones.android.cardviewconmysql.Donantes;
 import com.innovagenesis.aplicaciones.android.cardviewconmysql.adapter.RecyclerViewAdapter;
 
 import org.json.JSONArray;
