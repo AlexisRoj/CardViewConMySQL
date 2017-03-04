@@ -109,6 +109,7 @@
                 android:textColor="@color/colorGris" />
 
             <TextView
+                android:id="@+id/cvFactorSangre"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"

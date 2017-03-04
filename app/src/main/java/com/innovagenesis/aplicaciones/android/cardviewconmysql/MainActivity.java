@@ -17,7 +17,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements ConsultaGetAsync.OnConsultaFinaliza {
+public class MainActivity extends AppCompatActivity implements ConsultaGetAsync.OnConsultaFinaliza,DeleteDonanteAsync.OnRegistroEliminado {
 
     RecyclerView recyclerView;
     RecyclerViewAdapter adapter;
@@ -44,24 +44,27 @@ public class MainActivity extends AppCompatActivity implements ConsultaGetAsync.
 
 
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
-        adapter = new RecyclerViewAdapter(MainActivity.this,resultado);
+        adapter = new RecyclerViewAdapter(this,MainActivity.this,resultado);
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    public void mensaje (Activity activity, int ced){
 
 
-        try {
-            new DeleteDonanteAsync(activity).execute(new URL("http://192.168.100.3:8080/WebServiceExamenSiete/webapi/Donantes" +
-                    ced));
+    @Override
+    public void RegistroEliminado(Boolean donante) {
 
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
+        if (donante){
+            try {
+                new ConsultaGetAsync(this).execute(
+                        new URL ("http://192.168.100.3:8080/WebServiceExamenSiete/webapi/Donantes"));
+                Toast.makeText(MainActivity.this, "Elemento eliminado",Toast.LENGTH_SHORT).show();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
         }
 
 
-        //Toast.makeText(context, mensaje,Toast.LENGTH_SHORT).show();
     }
 }

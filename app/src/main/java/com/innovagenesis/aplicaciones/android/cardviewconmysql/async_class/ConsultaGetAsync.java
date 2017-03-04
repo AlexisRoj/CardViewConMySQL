@@ -90,7 +90,8 @@ public class ConsultaGetAsync extends AsyncTask<URL, Integer, String>{
                 donantes.donante_nombre = jsonArray.getJSONObject(i).getString("donante_nombre");
                 donantes.donante_apellido = jsonArray.getJSONObject(i).getString("donante_apellido");
                 donantes.donante_edad = jsonArray.getJSONObject(i).getInt("donante_edad");
-                donantes.donante_factor = jsonArray.getJSONObject(i).getString("donante_tipo_sangre");
+                donantes.donante_tipo = jsonArray.getJSONObject(i).getString("donante_tipo");
+                donantes.donante_factor = jsonArray.getJSONObject(i).getString("donante_factor");
                 donantes.donante_peso = jsonArray.getJSONObject(i).getInt("donante_peso");
                 donantes.donante_estatura = jsonArray.getJSONObject(i).getInt("donante_estatura");
                 data.add(donantes);

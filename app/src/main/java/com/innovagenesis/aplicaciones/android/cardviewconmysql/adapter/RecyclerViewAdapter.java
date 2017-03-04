@@ -12,8 +12,11 @@ import com.innovagenesis.aplicaciones.android.cardviewconmysql.Donantes;
 import com.innovagenesis.aplicaciones.android.cardviewconmysql.MainActivity;
 import com.innovagenesis.aplicaciones.android.cardviewconmysql.R;
 import com.innovagenesis.aplicaciones.android.cardviewconmysql.RecyclerViewHolder;
+import com.innovagenesis.aplicaciones.android.cardviewconmysql.async_class.DeleteDonanteAsync;
 
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 
@@ -24,13 +27,15 @@ import java.util.List;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
 
     private Context context;
+    private Activity activity;
     LayoutInflater inflater;
     List<Donantes> data = Collections.emptyList();
 
 
 
-    public RecyclerViewAdapter(Context context, List<Donantes> data) {
+    public RecyclerViewAdapter(Context context, Activity activity, List<Donantes> data) {
         this.context = context;
+        this.activity = activity;
         inflater = LayoutInflater.from(context);
         this.data = data;
     }
@@ -60,7 +65,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         holder.nombre.setText(current.donante_nombre);
         holder.apellido.setText(current.donante_apellido);
         holder.edad.setText(String.valueOf(current.donante_edad));
-        holder.tipoSangre.setText(current.donante_factor);
+        holder.tipoSangre.setText(current.donante_tipo);
+        holder.factorSangre.setText(current.donante_factor);
         holder.peso.setText(String.valueOf(current.donante_peso));
         holder.estatura.setText(String.valueOf(current.donante_estatura));
 
@@ -71,6 +77,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
                 //MainActivity act = new MainActivity();
 
                 //mensaje(activity,ced_borrar);
+
+                try {
+                    new DeleteDonanteAsync(activity).execute(new URL("http://192.168.100.3:8080/WebServiceExamenSiete/webapi/Donantes/" +
+                            ced_borrar));
+
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
