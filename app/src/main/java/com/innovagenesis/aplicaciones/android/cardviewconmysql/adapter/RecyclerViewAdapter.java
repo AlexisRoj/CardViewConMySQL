@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.innovagenesis.aplicaciones.android.cardviewconmysql.Donantes;
-import com.innovagenesis.aplicaciones.android.cardviewconmysql.MainActivity;
 import com.innovagenesis.aplicaciones.android.cardviewconmysql.R;
 import com.innovagenesis.aplicaciones.android.cardviewconmysql.RecyclerViewHolder;
 import com.innovagenesis.aplicaciones.android.cardviewconmysql.async_class.DeleteDonanteAsync;
@@ -50,17 +49,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     }
 
     @Override
-    public void onBindViewHolder(RecyclerViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerViewHolder holder, int position) {
 
         final Donantes current = data.get(position);
+        final int idDonanteBorrar = current.donante_ced;
 
-        int a = current.donante_ced;
-        final String b = current.donante_nombre;
-
-        final int ced_borrar = current.donante_ced;
-
-        //Toast.makeText(context,b,Toast.LENGTH_SHORT).show();
-
+        /** Carga los datos en el recyclerView */
         holder.idCedula.setText(String.valueOf(current.donante_ced));
         holder.nombre.setText(current.donante_nombre);
         holder.apellido.setText(current.donante_apellido);
@@ -70,31 +64,37 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         holder.peso.setText(String.valueOf(current.donante_peso));
         holder.estatura.setText(String.valueOf(current.donante_estatura));
 
+
         holder.edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(context,"Edit" + b,Toast.LENGTH_SHORT).show();
-                //MainActivity act = new MainActivity();
 
-                //mensaje(activity,ced_borrar);
-
-                try {
-                    new DeleteDonanteAsync(activity).execute(new URL("http://192.168.100.3:8080/WebServiceExamenSiete/webapi/Donantes/" +
-                            ced_borrar));
-
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                }
+                Toast.makeText(context,"Delete",Toast.LENGTH_SHORT).show();
             }
         });
 
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context,"Delete",Toast.LENGTH_SHORT).show();
+                int item = holder.getAdapterPosition();
+                try {
+                    /** Ejecuta tarea asincronica de borrado*/
+                    new DeleteDonanteAsync(activity).execute(new URL("http://192.168.100.3:8080/WebServiceExamenSiete/webapi/Donantes/" +
+                            idDonanteBorrar));
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
+                removeAt(item);
             }
         });
 
+    }
+
+    public void removeAt(int position) {
+        //Elimina los itemsd el recyclerView
+        data.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, data.size());
     }
 
     @Override

@@ -3,11 +3,6 @@ package com.innovagenesis.aplicaciones.android.cardviewconmysql.async_class;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
-import android.widget.Toast;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -67,13 +62,18 @@ public class DeleteDonanteAsync extends AsyncTask<URL, Integer, String> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        dialog.setMessage("Por favor espere...");
+        dialog.show();
     }
 
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
 
-                listener.RegistroEliminado(true);
+        if (dialog.isShowing()){
+            dialog.dismiss();
+        }
+        listener.RegistroEliminado(true);
 
         }
     }

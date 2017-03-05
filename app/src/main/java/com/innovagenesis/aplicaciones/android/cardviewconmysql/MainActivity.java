@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements ConsultaGetAsync.
     @Override
     public void RegistroEliminado(Boolean donante) {
 
-        if (donante){
+        /*if (donante){
             try {
                 new ConsultaGetAsync(this).execute(
                         new URL ("http://192.168.100.3:8080/WebServiceExamenSiete/webapi/Donantes"));
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements ConsultaGetAsync.
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
 
 
     }
